@@ -1,0 +1,15 @@
+
+image: node:19.6.1
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - npm install
+    - CI=false npm run prepare
+    - npm publish
+    - echo "-- build completed succesfully"
+  only:
+    - production
