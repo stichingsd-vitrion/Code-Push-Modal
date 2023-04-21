@@ -5,9 +5,9 @@ A wrapper around CodePush with integration with Sentry, custom modal for sync, m
 ## Installation
 
 To use `@vitrion/sentry-code-push-modal` in your project, run the following command:
-
+```
 npm install @vitrion/sentry-code-push-modal
-
+```
 
 ## Usage
 
