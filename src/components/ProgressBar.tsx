@@ -1,10 +1,17 @@
 import React from 'react';
-import {Animated, Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, Animated} from 'react-native';
 import {progressBarWidth} from '../constants';
 import {useTranslation} from 'react-i18next';
 import {useCodePush} from '../CodePushProvider';
 
-export const RenderProgressBar = ({animatedProgressValue, currentProgress}) => {
+interface RenderProgressBarProps {
+  animatedProgressValue: Animated.Value;
+  currentProgress: number;
+}
+export const RenderProgressBar = ({
+  animatedProgressValue,
+  currentProgress,
+}: RenderProgressBarProps) => {
   const {primaryColor} = useCodePush();
   const {t} = useTranslation();
   const translateX = animatedProgressValue.interpolate({

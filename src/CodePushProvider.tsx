@@ -11,6 +11,7 @@ import {
   Linking,
   Platform,
   ImageSourcePropType,
+  AppStateStatus,
 } from 'react-native';
 import {useImmer} from 'use-immer';
 import CodePush from 'react-native-code-push';
@@ -26,6 +27,7 @@ import {useCodePushModal} from './hooks/useCodePushModal';
 import {useUpdatePackage} from './hooks/useUpdatePackage';
 import {logCodePush} from './utils/logCodePush';
 import {ReactNode} from 'react';
+import {State} from './interfaces';
 
 interface CodePushContextValue {
   showAndUpdate: () => void;
@@ -47,6 +49,17 @@ interface CodePushContextValue {
   openStore?: () => void;
 }
 
+export interface DownloadProgress {
+  /**
+   * The total number of bytes expected to be received for this update.
+   */
+  totalBytes: number;
+
+  /**
+   * The number of bytes downloaded thus far.
+   */
+  receivedBytes: number;
+}
 const CodePushContext = createContext<CodePushContextValue>(null as any);
 
 export const useCodePush = () =>
@@ -70,7 +83,7 @@ const CodePushProvider = ({
   androidLink,
   updateImage,
 }: Props) => {
-  const [state, setState] = useImmer({
+  const [state, setState] = useImmer<State>({
     isMandatory: false,
     status: '',
     animatedOpacityValue: new Animated.Value(0),
@@ -152,11 +165,11 @@ const CodePushProvider = ({
       });
     },
     // eslint-disable-next-line
-    [_show, deploymentKey, setState, state.updateLater]
+        [_show, deploymentKey, setState, state.updateLater]
   );
 
   const runSync = useCallback(
-    nextAppState => {
+    (nextAppState: AppStateStatus) => {
       logCodePush('appstate');
       if (
         appState.current.match(/inactive|background/) &&
@@ -256,7 +269,10 @@ const CodePushProvider = ({
   };
 
   /*Callback for sync to set status to our state.*/
-  const _codePushStatusDidChange = (syncStatus, initial = false) => {
+  const _codePushStatusDidChange = (
+    syncStatus: CodePush.SyncStatus,
+    initial = false,
+  ) => {
     logCodePush('syncStatus', syncStatus, initial);
     switch (syncStatus) {
       case CodePush.SyncStatus.UPDATE_INSTALLED:
@@ -272,7 +288,7 @@ const CodePushProvider = ({
   };
 
   /*This is the downloadProgress listener we pass to the download screen*/
-  const _codePushDownloadDidProgress = prog => {
+  const _codePushDownloadDidProgress = (prog: DownloadProgress) => {
     const {receivedBytes, totalBytes} = prog;
     let temp = receivedBytes / totalBytes;
     setProgress(draft => {
@@ -286,12 +302,12 @@ const CodePushProvider = ({
   };
 
   /*
-                    Set update later, but if mandatory then set the version as the updateLater,
-                    this allows us to force a new mandatory if it is present
-                    */
+                        Set update later, but if mandatory then set the version as the updateLater,
+                        this allows us to force a new mandatory if it is present
+                        */
   const _updateLater = () => {
     setState(draft => {
-      draft.updateLater = draft.isMandatory ? draft.updateInfo.label : true;
+      draft.updateLater = draft.isMandatory ? draft.updateInfo!.label : true;
     });
     _hide();
   };

@@ -1,6 +1,7 @@
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useCodePush} from '../CodePushProvider';
+import {useTranslation} from 'react-i18next';
 
 export const FooterButtons = ({
   hideOptionalButton = false,
@@ -10,19 +11,21 @@ export const FooterButtons = ({
   text = 'Text',
 }) => {
   const {primaryColor} = useCodePush();
+  const {t} = useTranslation();
+
   return (
     <View style={styles.row}>
       {hideOptionalButton && (
         <TouchableOpacity
           style={[styles.deactiveButton]}
           onPress={onPressOptional}>
-          <Text style={[styles.deactiveButtonText]}>{optionalText}</Text>
+          <Text style={[styles.deactiveButtonText]}>{t(optionalText)}</Text>
         </TouchableOpacity>
       )}
       <TouchableOpacity
         style={[styles.activeButton, {backgroundColor: primaryColor}]}
         onPress={onPress}>
-        <Text style={[styles.activeButtonText]}>{text}</Text>
+        <Text style={[styles.activeButtonText]}>{t(text)}</Text>
       </TouchableOpacity>
     </View>
   );

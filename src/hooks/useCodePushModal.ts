@@ -1,7 +1,8 @@
 import {useCallback, useState} from 'react';
 import {Animated} from 'react-native';
+import {State} from '../interfaces';
 
-export const useCodePushModal = ({state}) => {
+export const useCodePushModal = ({state}: {state: State}) => {
   // const [modal, toggleModel] = useState(true);
   const [modal, toggleModel] = useState(false);
   const _show = useCallback(() => {

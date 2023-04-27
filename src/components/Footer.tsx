@@ -32,8 +32,8 @@ export const Footer = () => {
             optionalText={
               status === SYNC_STATUS_UPDATE_AVAILABLE ||
               status === SYNC_STATUS_STORE_UPDATE
-                ? t('sync:code_push.optional_button.update')
-                : t('sync:code_push.optional_button.restart')
+                ? 'sync:code_push.optional_button.update'
+                : 'sync:code_push.optional_button.restart'
             }
             onPressOptional={_updateLater}
             onPress={() => {
@@ -45,14 +45,12 @@ export const Footer = () => {
             }}
             text={
               status === SYNC_STATUS_UPDATE_AVAILABLE
-                ? t('sync:code_push.button.update')
+                ? 'sync:code_push.button.update'
                 : status === SYNC_STATUS_STORE_UPDATE
-                ? t(
-                    `sync:code_push.button.${
-                      Platform.OS === 'ios' ? 'appstore' : 'playstore'
-                    }`,
-                  )
-                : t('sync:code_push.button.restart')
+                ? `sync:code_push.button.${
+                    Platform.OS === 'ios' ? 'appstore' : 'playstore'
+                  }`
+                : 'sync:code_push.button.restart'
             }
             hideOptionalButton={
               !isMandatory && status !== SYNC_STATUS_UPDATE_RESTARTING

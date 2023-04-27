@@ -32,7 +32,9 @@ export const codePushDeploymentKey = __DEV__ ? stagingKey : productionKey;
 <CodePushProvider
   deploymentKey={codePushDeploymentKey}
   primaryColor={'#33AF95'}
->
+  androidLink={"https://play.google.com/store/apps/details?id=<your-app-id>"}
+  iosLink={"itms-apps://apps.apple.com/<your-app-id>"}
+    >
   // Your app content here
 </CodePushProvider>
 ```

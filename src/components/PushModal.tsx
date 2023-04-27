@@ -15,7 +15,13 @@ import {Footer} from './Footer';
 const {width, height} = Dimensions.get('window');
 const dialogWidth = width - 20;
 const dialogHeight = height * 0.8;
-const getModalAnimation = ({animationType = 'scale', animatedScaleValue}) => {
+const getModalAnimation = ({
+  animationType = 'scale',
+  animatedScaleValue,
+}: {
+  animationType?: 'scale' | 'slide';
+  animatedScaleValue: Animated.Value;
+}) => {
   if (animationType === 'scale') {
     const scale = animatedScaleValue.interpolate({
       inputRange: [0, 1],
