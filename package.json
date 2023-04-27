@@ -26,7 +26,7 @@
     "react-native": ">=0.70.0",
     "react-native-code-push": ">=8.0.0",
     "immer": ">=2.0.0",
-    "use-immer": "^0.8.1"
+    "use-immer": ">=0.8.0"
   },
   "author": "",
   "license": "ISC",
