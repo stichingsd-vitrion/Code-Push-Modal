@@ -1,13 +1,13 @@
 {
   "name": "@vitrion/sentry-code-push-modal",
-  "version": "1.0.24",
+  "version": "1.0.28",
   "description": "A wrapper around CodePush with integration with Sentry, custom modal for sync, multiple extra features, and i18n integration.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "release": "node ./scripts/codepush-release.js",
     "update": "node ./scripts/codepush-update.js",
-    "publish": "npm publish --access public",
+    "publish": "npm run build && npm publish --access public",
     "prepare": "npm run build",
     "clean": "rimraf dist",
     "tscBuild": "tsc --build",
