@@ -1,13 +1,13 @@
 {
-  "name": "@vitrion/sentry-code-push-modal",
-  "version": "1.0.28",
-  "description": "A wrapper around CodePush with integration with Sentry, custom modal for sync, multiple extra features, and i18n integration.",
+  "name": "@vitrion/code-push-modal",
+  "version": "1.0.1",
+  "description": "A wrapper around CodePush, custom modal for sync, multiple extra features, and i18n integration.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "release": "node ./scripts/codepush-release.js",
     "update": "node ./scripts/codepush-update.js",
-    "publish": "npm run build && npm publish --access public",
+    "publish": "npm publish --access public",
     "prepare": "npm run build",
     "clean": "rimraf dist",
     "tscBuild": "tsc --build",
@@ -20,7 +20,6 @@
     "scripts"
   ],
   "peerDependencies": {
-    "@sentry/react-native": ">=4.14.0",
     "react-i18next": "^12.0.0",
     "react": "^16.8.0 || ^17.0.1 || ^18.0.0",
     "react-native": ">=0.70.0",
@@ -64,6 +63,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stichingsd-vitrion/Sentry-Code-Push-Modal.git"
+    "url": "https://github.com/stichingsd-vitrion/Code-Push-Modal.git"
   }
 }

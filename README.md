@@ -1,18 +1,18 @@
-# @vitrion/sentry-code-push-modal
+# @vitrion/code-push-modal
 
-A wrapper around CodePush with integration with Sentry, custom modal for sync, multiple extra features, and i18n integration.
+A wrapper around CodePush, custom modal for sync, multiple extra features, and i18n integration.
 
 ## Installation
 
-To use `@vitrion/sentry-code-push-modal` in your project, run the following command:
+To use `@vitrion/code-push-modal` in your project, run the following command:
 
 npm:
 ```
-npm install @vitrion/sentry-code-push-modal
+npm install @vitrion/code-push-modal
 ```
 
 ```
-yarn add @vitrion/sentry-code-push-modal
+yarn add @vitrion/-code-push-modal
 ```
 
 
@@ -23,8 +23,7 @@ Wrap your app with `CodePushProvider` to enable code-push sync with a custom mod
 ```typescript
 import {
   CodePushProvider,
-  initCodePushSentry,
-} from '@vitrion/sentry-code-push-modal';
+} from '@vitrion/code-push-modal';
 
 const stagingKey = isIOS ? stagingKey_iOS : stagingKey_android;
 const productionKey = isIOS ? productionKey_iOS : productionKey_android;
@@ -38,16 +37,30 @@ export const codePushDeploymentKey = __DEV__ ? stagingKey : productionKey;
 </CodePushProvider>
 ```
 
-To use Sentry with CodePush, you'll need to initialize it by calling initCodePushSentry in your main.tsx file:
-```typescript
-import { initCodePushSentry } from '@vitrion/sentry-code-push-modal';
+To use Sentry with CodePush, you'll need to initialize it by calling initCodePushSentry in your main.tsx file. This function takes two arguments: the current version of your app (which you can get from your package.json file) and a callback function that initializes Sentry with the appropriate configuration.
 
-initCodePushSentry(version, 'sentrydns...').then();
-```
-If you want to track routing events with Sentry, you can use routingInstrumentation:
-
+Here's an example of how to use initCodePushSentry:
 ```typescript
-import { routingInstrumentation } from '@vitrion/sentry-code-push-modal';
+import { initCodePush } from '@vitrion/code-push-modal';
+import * as Sentry from '@sentry/react-native';
+import { version } from '../package.json';
+
+const initializeSentry = ({ release, dist }) => {
+    Sentry.init({
+        dsn: 'https://your-sentry-dsn',
+        environment: __DEV__ ? 'development' : 'production',
+        enableAutoSessionTracking: false,
+        release,
+        dist,
+        integrations: [
+            new Sentry.ReactNativeTracing({
+                routingInstrumentation,
+            }),
+        ],
+    });
+};
+
+initCodePush(version, initializeSentry).then();
 ```
 
 Finally, you can use the useCodePush hook to get all data from CodePush:

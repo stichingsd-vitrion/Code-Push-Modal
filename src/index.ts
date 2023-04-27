@@ -1,6 +1,5 @@
 export {default as CodePushProvider, useCodePush} from './CodePushProvider';
-export {initCodePushSentry} from './hooks/initCodePushSentry';
-export {routingInstrumentation} from './hooks/sentryInit';
+export {initCodePush} from './hooks/initCodePush';
 export {
   SYNC_STATUS_SYNCING,
   SYNC_STATUS_STORE_UPDATE,
