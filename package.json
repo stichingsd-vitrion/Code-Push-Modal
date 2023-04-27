@@ -1,6 +1,6 @@
 {
   "name": "@vitrion/code-push-modal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A wrapper around CodePush, custom modal for sync, multiple extra features, and i18n integration.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",

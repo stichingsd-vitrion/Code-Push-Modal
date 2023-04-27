@@ -1,3 +1,28 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+//  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "declaration": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "declarationDir": "dist/types"
+
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
